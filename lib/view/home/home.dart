@@ -51,9 +51,23 @@ class _homeState extends State<home> {
                     onTap: (){
                       // Get.to(()=> notifications());
                     },
-                    child: Icon(CupertinoIcons.search,color: textblackColor,)
+                    child: Icon(CupertinoIcons.search,color: textblackColor,size: 28,)
                   ),
-                  SizedBox(width: 7,),
+                  SizedBox(width: 15,),
+                  GestureDetector(
+                    onTap: (){
+                      // Get.to(()=> notifications());
+                    },
+                    child: Icon(Icons.favorite_outline_rounded,color: textblackColor,size: 28,)
+                  ),
+                  SizedBox(width: 15,),
+                  GestureDetector(
+                    onTap: (){
+                      // Get.to(()=> notifications());
+                    },
+                    child: Image.asset('assets/icons/cart.png',width: 23,)
+                  ),
+                  SizedBox(width: 25,),
                 ],
                 title:  Image.asset(
                   'assets/logo/logo.png',
@@ -130,7 +144,7 @@ class _homeState extends State<home> {
                                       // Get.to(() => allcategories());
                                     },
                                     child: Container(
-                                      child: Text("View All",style: TextStyle(fontWeight: FontWeight.w400,fontSize: Get.width/25,color: Colors.black54),),
+                                      child: Text("View All",style: TextStyle(fontWeight: FontWeight.w400,fontSize: Get.width/25,color: primaryColor,decorationColor: primaryColor,decoration: TextDecoration.underline),),
                                     ),
                                   ),
                                 ],
@@ -217,14 +231,14 @@ class _homeState extends State<home> {
                                 children: [
                                   Container(
                                     // padding: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text("Our Products",style: TextStyle(fontWeight: FontWeight.w600,fontSize: Get.width/21),),
+                                    child: Text("Suggested For You",style: TextStyle(fontWeight: FontWeight.w600,fontSize: Get.width/21),),
                                   ),
                                   GestureDetector(
                                     onTap: (){
                                       // Get.to(() => allcategories());
                                     },
                                     child: Container(
-                                      child: Text("View All",style: TextStyle(fontWeight: FontWeight.w400,fontSize: Get.width/25,color: Colors.black54),),
+                                      child: Text("View All",style: TextStyle(fontWeight: FontWeight.w400,fontSize: Get.width/25,color: primaryColor,decorationColor: primaryColor,decoration: TextDecoration.underline),),
                                     ),
                                   ),
                                 ],
@@ -233,20 +247,20 @@ class _homeState extends State<home> {
                                   SizedBox(height: 10,),
                             Container(
                               // color: Colors.yellow,
-                              height: 200,
+                              height: 340,
                               child: ListView.builder(
                                 // padding: EdgeInsets.all(0),
                                 physics: ScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
-                                itemCount: controller.productdata[0]['products']['return']['data'].length,
+                                itemCount: controller.homedata[0]['suggested_products'].length,
                                 // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 //     childAspectRatio: 2/2.7,
                                 //     crossAxisCount: 3
                                 // ),
                                 padding: EdgeInsets.all(0),
                                 itemBuilder: (BuildContext context, int index) {
-                                  Map data = controller.productdata[0]['products']['return']['data'][index];
+                                  Map data = controller.homedata[0]['suggested_products'][index];
                                   return GestureDetector(
                                     onTap: (){
 
@@ -259,6 +273,7 @@ class _homeState extends State<home> {
                                             // color: Colors.black.withOpacity(.09),
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
+
                                               children: [
                                                 Container(
 
@@ -276,8 +291,8 @@ class _homeState extends State<home> {
                                                       ClipRRect(
                                                         borderRadius: BorderRadius.circular(20),
                                                         child: Image.network(
-                                                         '${baseurl}images/product/${data['image'].toString()}', height: Get.width/2.3,
-                                                          width: Get.width/3,
+                                                         '${baseurl}images/product/${data['image'].toString()}', height: Get.width/1.6,
+                                                          width: Get.width/2.2,
                                                           fit: BoxFit.cover,
                                                           errorBuilder: (a,b,c){
                                                             return Image.asset('assets/images/placeholder_banner.webp', height: Get.width/3.4,
@@ -287,6 +302,21 @@ class _homeState extends State<home> {
                                                       ),
                                                     ],
                                                   ),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: Get.width/2.2,
+                                                      // padding: EdgeInsets.symmetric(horizontal: 15),
+                                                      child: Text(data['name'].toString(),style: TextStyle(fontWeight: FontWeight.w400,fontSize: Get.width/27),),
+                                                    ),
+                                                    Container(
+                                                      // padding: EdgeInsets.symmetric(horizontal: 15),
+                                                      child: Text('OMR ${data['price'].toString()}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: Get.width/27),),
+                                                    ),
+                                                  ],
                                                 ),
 
                                               ],
@@ -302,6 +332,7 @@ class _homeState extends State<home> {
                           ]
                         ),
                       SizedBox(height: Get.height*.01,),
+                      Image.asset('assets/images/new_arrival.png'),
                       SizedBox(height: 10,),
                       SizedBox(height: 30,),
 
